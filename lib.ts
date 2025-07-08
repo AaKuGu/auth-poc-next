@@ -2,14 +2,14 @@ import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
-const secretKey = "secret";
+const secretKey = process.env.SECRET_KEY || "default_secret";
 const key = new TextEncoder().encode(secretKey);
 
 export async function encrypt(payload: any) {
   return await new SignJWT(payload)
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
-    .setExpirationTime("10 sec from now")
+    .setExpirationTime("60 sec from now")
     .sign(key);
 }
 
