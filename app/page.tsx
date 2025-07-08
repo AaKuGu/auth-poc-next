@@ -1,10 +1,13 @@
 import { redirect } from "next/navigation";
 import { getSession, login, logout } from "@/lib";
+import Link from "next/link";
 
 export default async function Page() {
   const session = await getSession();
   return (
     <section>
+      <Link href={`/dashboard`}>Dashboard</Link>
+
       <form
         action={async (formData) => {
           "use server";
